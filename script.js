@@ -1,23 +1,30 @@
 let interval;
-let minutes = 25;
-let seconds = 0;
+let max_minutes = 0;
+let max_seconds = 1;
+let minutes;
+let seconds;
 let gachaponWheel;
 
 // Register GSAP plugin
 gsap.registerPlugin('gsap');
 
 function startTimer() {
+  if (interval) {
+    return;
+  }
   interval = setInterval(updateTimer, 1000);
+  updateTimer();
 }
 
 function pauseTimer() {
   clearInterval(interval);
+  interval = null;
 }
 
 function resetTimer() {
-  clearInterval(interval);
-  minutes = 25;
-  seconds = 0;
+  pauseTimer();
+  minutes = max_minutes;
+  seconds = max_seconds;
   updateDisplay();
 }
 
@@ -26,6 +33,7 @@ function updateTimer() {
     clearInterval(interval);
     alert("Time's up!")
     spinGachapon();
+    // resetTimer();
     return;
   }
   if (seconds === 0) {
@@ -49,6 +57,24 @@ function spinGachapon() {
 
 function alertPrize() {
   alert("Congratulations! You won: " + gachaponWheel.getIndicatedSegment().text);
+  // Update timer based on prize
+  switch (gachaponWheel.getIndicatedSegment().text) {
+    case "5 minute break":
+      max_minutes = 5;
+      max_seconds = 0;
+      break;
+    case "10 minute break":
+      max_minutes = 10;
+      max_seconds = 0;
+      break;
+    case "20 minute break":
+      max_minutes = 20;
+      max_seconds = 0;
+      break;
+  }
+  resetTimer();
+  updateDisplay();
+  
 }
 
 function updateDisplay() {
@@ -108,9 +134,9 @@ function initializeWinwheel() {
           'outerRadius': 150,
           'textFontSize': 16,
           'segments': [
-              { 'fillStyle': '#eae56f', 'text': '5 minutes', 'size':  270},
-              { 'fillStyle': '#89f26e', 'text': '10 minutes', 'size': 72},
-              { 'fillStyle': '#e7706f', 'text': '20 minutes', 'size': 18 }
+              { 'fillStyle': '#eae56f', 'text': '5 minute break', 'size':  270},
+              { 'fillStyle': '#89f26e', 'text': '10 minute break', 'size': 72},
+              { 'fillStyle': '#e7706f', 'text': '20 minute break', 'size': 18 }
           ],
           'animation': {
               'type': 'spinToStop',
@@ -127,6 +153,7 @@ function initializeWinwheel() {
 
   // Or use window's load event to ensure the canvas is initialized after all resources (including images) are loaded
   window.addEventListener("load", function() {
+      resetTimer();
       initializeCanvas();
   });
 }
