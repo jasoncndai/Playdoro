@@ -1,9 +1,10 @@
 let interval;
-let max_minutes = 0;
-let max_seconds = 1;
+let max_minutes = 25;
+let max_seconds = 0;
 let minutes;
 let seconds;
 let gachaponWheel;
+let workSession = true;
 
 // Register GSAP plugin
 gsap.registerPlugin('gsap');
@@ -25,15 +26,26 @@ function resetTimer() {
   pauseTimer();
   minutes = max_minutes;
   seconds = max_seconds;
+  updateSessionStatus(); // Update session status when resetting timer
   updateDisplay();
 }
 
 function updateTimer() {
-  if (minutes === 0 && seconds === 0) {
+  if (minutes === 0 && seconds === 0 && workSession) {
     clearInterval(interval);
     alert("Time's up!")
+    workSession = false;
     spinGachapon();
     // resetTimer();
+    return;
+  }
+  else if (minutes === 0 && seconds === 0 && !workSession) {
+    clearInterval(interval);
+    alert("Time's up!")
+    workSession = true;
+    max_minutes = 25;
+    max_seconds = 0;
+    resetTimer();
     return;
   }
   if (seconds === 0) {
@@ -73,8 +85,8 @@ function alertPrize() {
       break;
   }
   resetTimer();
+  updateSessionStatus(); // Update session status after winning a prize
   updateDisplay();
-  
 }
 
 function updateDisplay() {
@@ -82,6 +94,11 @@ function updateDisplay() {
   const secondsDisplay = String(seconds).padStart(2, "0");
   document.getElementById("minutes").textContent = minutesDisplay;
   document.getElementById("seconds").textContent = secondsDisplay;
+}
+
+function updateSessionStatus() {
+  const sessionStatusElement = document.getElementById("sessionStatus");
+  sessionStatusElement.textContent = workSession ? "Work Time" : "Break Time";
 }
 
 document.getElementById("start").addEventListener("click", startTimer);
@@ -155,6 +172,7 @@ function initializeWinwheel() {
   window.addEventListener("load", function() {
       resetTimer();
       initializeCanvas();
+      updateSessionStatus(); // Update session status after Winwheel is initialized
   });
 }
 

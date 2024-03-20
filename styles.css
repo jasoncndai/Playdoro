@@ -29,6 +29,13 @@ body {
     margin-top: 20px;
   }
 
+  #sessionStatus {
+    font-size: 72px; /* Large font size */
+    color: pink; /* Pink color */
+    padding: 10px; Padding
+    margin-top: 20px; /* Top margin */
+  }
+
   .hidden {
     display: none;
   }
