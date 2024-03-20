@@ -1,10 +1,13 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
+    background-color: gray;
   }
   
   .timer {
-    font-size: 48px;
+    font-size: 120px;
+    margin-top: 20px;
+
   }
   
   .controls {
@@ -15,4 +18,17 @@ body {
     padding: 10px 20px;
     font-size: 16px;
     margin: 0 5px;
+    color: violet;
+    background-color: black;
+    border: 2px solid violet;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .gachapon {
+    margin-top: 20px;
+  }
+
+  .hidden {
+    display: none;
   }
