@@ -15,8 +15,3 @@ The wheel follows similar probability to those of modern gacha games with a "3-s
 
 ## Contributing
 Feel free to suggest improvements that would help your workflow, interactibility, and motivation for using this tool!
-
-## TODO
-- Improve frontend UI
-- refine rewards for each roll for collecting characters, allotting break time for a game, etc.
-- Implement settings to change time, amount of sessions, control colours/themes, etc.
