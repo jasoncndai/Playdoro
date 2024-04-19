@@ -6,7 +6,7 @@ I found that pomodoro timers were a very helpful productivity tool for me, but t
 This app attempts to mimic systems in popular modern gacha games by motivating you with rolls at the end of each pomodoro round similar to how those games use daily rewards that allow you to roll for characters you want.
 
 ## Quick Start
-The web app is hosted here: [https://jasond20.github.io/Playdoro/](Playdoro)
+The web app is hosted [https://jasond20.github.io/Playdoro/](here)
 
 ## Usage
 Timer functions should be apparent, start to start timer, stop to stop timer, and reset to reset timer.
